@@ -1,37 +1,94 @@
 <LibraryScreen>:
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
+
+    ScrollView:
+        size_hint: 1, 1
+        bar_width: 12
+        scroll_type: ['bars', 'content']
+        do_scroll_x: False
+        do_scroll_y: True
+        effect_cls: 'ScrollEffect'
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 0  # transparent, just for stacking
+        # You can add content here if needed, e.g.:
+        # BoxLayout:
+        #     size_hint_y: None
+        #     height: self.minimum_height
+        #     # ...
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
 
 <SettingsScreen>:
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
 
 <AssistantScreen>:
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
 
 <VideosScreen>:
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
 
 <VisualGraphicsScreen>:
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
 <MainScreen>:
     MainLayout:
 <MainLayout>:
@@ -42,45 +99,58 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'ebook.png'
+            source: 'bg.png'
 
     # Top navigation bar
     BoxLayout:
         pos_hint: {"top": 1}
+        size_hint_x: 1
         size_hint_y: None
         height: root.height * 0.085
-        padding: [root.width * 0.02, root.height * 0.01]
-        spacing: root.width * 0.02
+        padding: [0, root.height * 0.01, 0, root.height * 0.01]
+        spacing: root.width * 0.025
+        canvas.before:
+            Color:
+                rgba: 0.117647, 0.239215, 0.345098, 1
+            Rectangle:
+                pos: self.parent.x if self.parent else 0, self.y
+                size: self.parent.width if self.parent else self.width, self.height
         MDRaisedButton:
             text: "Home"
             on_release: app.change_screen('main')
             font_name: 'BayerType'
+            font_size: root.height * 0.035
             size_hint_x: None
-            width: root.width * 0.12
+            width: root.width * 0.18
             size_hint_y: None
             height: root.height * 0.07
-            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            padding: [16, 0]
+            md_bg_color: 0.22, 0.38, 0.56, 1  # lighter than navbar
             text_color: 1, 1, 1, 1
         MDRaisedButton:
             text: "Library"
             on_release: app.change_screen('library')
             font_name: 'BayerType'
+            font_size: root.height * 0.035
             size_hint_x: None
-            width: root.width * 0.12
+            width: root.width * 0.18
             size_hint_y: None
             height: root.height * 0.07
-            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            padding: [16, 0]
+            md_bg_color: 0.22, 0.38, 0.56, 1
             text_color: 1, 1, 1, 1
         Widget:
         MDRaisedButton:
             text: "Settings"
             on_release: app.change_screen('settings')
             font_name: 'BayerType'
+            font_size: root.height * 0.035
             size_hint_x: None
-            width: root.width * 0.12
+            width: root.width * 0.18
             size_hint_y: None
             height: root.height * 0.07
-            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            padding: [16, 0]
+            md_bg_color: 0.22, 0.38, 0.56, 1
             text_color: 1, 1, 1, 1
 
     Label:
@@ -107,35 +177,45 @@
         text_color: 1, 1, 1, 1
         on_release: app.change_screen('assistant')
 
+    MDRaisedButton:
+        text: "> videos"
+        on_release: app.change_screen('videos')
+        font_name: 'BayerType'
+        size_hint_y: None
+        height: root.height * 0.08
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.6, 0.7, 0.9, 1
+        text_color: 0, 0, 0, 1
+
+    MDRaisedButton:
+        text: "> visual graphics"
+        on_release: app.change_screen('visualgraphics')
+        font_name: 'BayerType'
+        size_hint_y: None
+        height: root.height * 0.08
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.6, 0.7, 0.9, 1
+        text_color: 0, 0, 0, 1
+
     Label:
         text: "project library"
         font_name: 'BayerType'
         font_size: root.height * 0.035
         color: 0.117647, 0.239215, 0.345098, 1
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.01
 
     BoxLayout:
         orientation: "vertical"
-        spacing: root.height * 0.015
-        padding: [root.width * 0.04, 0]
-        MDRaisedButton:
-            text: "> videos"
-            on_release: app.change_screen('videos')
-            font_name: 'BayerType'
-            size_hint_y: None
-            height: root.height * 0.08
-            size_hint_x: None
-            width: root.width * 0.18
-            pos_hint: {'center_x': 0.5}
-            md_bg_color: 0.6, 0.7, 0.9, 1
-            text_color: 0, 0, 0, 1
-        MDRaisedButton:
-            text: "> visual graphics"
-            on_release: app.change_screen('visualgraphics')
-            font_name: 'BayerType'
-            size_hint_y: None
-            height: root.height * 0.08
-            size_hint_x: None
-            width: root.width * 0.18
-            pos_hint: {'center_x': 0.5}
-            md_bg_color: 0.6, 0.7, 0.9, 1
-            text_color: 0, 0, 0, 1
+        spacing: root.height * 0.005  # reduced spacing
+        padding: [root.width * 0.04, 0, 0, 0]  # remove top padding
+        canvas.before:
+            Rectangle:
+                size: (700, 400)  # Replace with your textbg.jpg's native size
+                pos: (self.center_x - 350, self.center_y - 200)
+                source: 'textbg.jpg'
+        
