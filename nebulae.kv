@@ -1,83 +1,111 @@
-<MainLayout>:
-    orientation: "vertical"
-
-    # Responsive padding and spacing — top padding removed so nav sits at screen top
-    padding: [root.width * 0.05, 0, root.width * 0.05, root.height * 0.05]
-    spacing: root.height * 0.03
-
+<LibraryScreen>:
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'ebook.png'
 
-    # Top navigation bar (flush to top, full width)
+<SettingsScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'ebook.png'
+
+<AssistantScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'ebook.png'
+
+<VideosScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'ebook.png'
+
+<VisualGraphicsScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'ebook.png'
+<MainScreen>:
+    MainLayout:
+<MainLayout>:
+    orientation: "vertical"
+    padding: [root.width * 0.05, 0, root.width * 0.05, root.height * 0.05]
+    spacing: root.height * 0.03
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'ebook.png'
+
+    # Top navigation bar
     BoxLayout:
         pos_hint: {"top": 1}
         size_hint_y: None
         height: root.height * 0.085
         padding: [root.width * 0.02, root.height * 0.01]
         spacing: root.width * 0.02
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, 0.85
-            Rectangle:
-                pos: self.pos
-                size: self.size
-
-        Button:
+        MDRaisedButton:
             text: "Home"
+            on_release: app.change_screen('main')
             font_name: 'BayerType'
             size_hint_x: None
             width: root.width * 0.12
             size_hint_y: None
             height: root.height * 0.07
-            background_normal: ''
-            background_color: 0, 0, 0, 0
-            color: 0.117647, 0.239215, 0.345098, 1
-
-        Button:
+            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            text_color: 1, 1, 1, 1
+        MDRaisedButton:
             text: "Library"
+            on_release: app.change_screen('library')
             font_name: 'BayerType'
             size_hint_x: None
             width: root.width * 0.12
             size_hint_y: None
             height: root.height * 0.07
-            background_normal: ''
-            background_color: 0, 0, 0, 0
-            color: 0.117647, 0.239215, 0.345098, 1
-
+            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            text_color: 1, 1, 1, 1
         Widget:
-            # spacer
-
-        Button:
+        MDRaisedButton:
             text: "Settings"
+            on_release: app.change_screen('settings')
             font_name: 'BayerType'
             size_hint_x: None
             width: root.width * 0.12
             size_hint_y: None
             height: root.height * 0.07
-            background_normal: ''
-            background_color: 0, 0, 0, 0
-            color: 0.117647, 0.239215, 0.345098, 1
+            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            text_color: 1, 1, 1, 1
 
     Label:
         text: "nebulae"
         font_name: 'BayerType'
-        font_size: root.height * 0.06
+        font_size: root.height * 0.11  # larger
         bold: True
         color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04  # extra top margin
+        pos_hint: {"top": 1}
 
-    Button:
+    MDRaisedButton:
         text: "ai assistant"
         font_name: 'BayerType'
         font_size: root.height * 0.04
         size_hint_y: None
         height: root.height * 0.06
-        background_normal: ''
-        background_color: 0.6, 0.7, 0.9, 1
-        color: 0, 0, 0, 1
-
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('assistant')
 
     Label:
         text: "project library"
@@ -89,19 +117,25 @@
         orientation: "vertical"
         spacing: root.height * 0.015
         padding: [root.width * 0.04, 0]
-
-        Button:
+        MDRaisedButton:
             text: "> videos"
+            on_release: app.change_screen('videos')
             font_name: 'BayerType'
             size_hint_y: None
             height: root.height * 0.08
-            background_color: 0.6, 0.7, 0.9, 1
-            color: 0, 0, 0, 1
-
-        Button:
+            size_hint_x: None
+            width: root.width * 0.18
+            pos_hint: {'center_x': 0.5}
+            md_bg_color: 0.6, 0.7, 0.9, 1
+            text_color: 0, 0, 0, 1
+        MDRaisedButton:
             text: "> visual graphics"
+            on_release: app.change_screen('visualgraphics')
             font_name: 'BayerType'
             size_hint_y: None
             height: root.height * 0.08
-            background_color: 0.6, 0.7, 0.9, 1
-            color: 0, 0, 0, 1
+            size_hint_x: None
+            width: root.width * 0.18
+            pos_hint: {'center_x': 0.5}
+            md_bg_color: 0.6, 0.7, 0.9, 1
+            text_color: 0, 0, 0, 1

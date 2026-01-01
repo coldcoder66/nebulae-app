@@ -1,18 +1,41 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.image import Image as CoreImage
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
 import os
 
-
 class MainLayout(BoxLayout):
     pass
 
+class MainScreen(Screen):
+    pass
+class LibraryScreen(Screen):
+    pass
+class SettingsScreen(Screen):
+    pass
+class AssistantScreen(Screen):
+    pass
+class VideosScreen(Screen):
+    pass
+class VisualGraphicsScreen(Screen):
+    pass
 
-class NebulaeApp(App):
+class NebulaeApp(MDApp):
     def build(self):
-        return MainLayout()
+        self.sm = ScreenManager()
+        self.sm.add_widget(MainScreen(name="main"))
+        self.sm.add_widget(LibraryScreen(name="library"))
+        self.sm.add_widget(SettingsScreen(name="settings"))
+        self.sm.add_widget(AssistantScreen(name="assistant"))
+        self.sm.add_widget(VideosScreen(name="videos"))
+        self.sm.add_widget(VisualGraphicsScreen(name="visualgraphics"))
+        return self.sm
+
+    def change_screen(self, screen_name):
+        if hasattr(self, 'sm') and self.sm.has_screen(screen_name):
+            self.sm.current = screen_name
 
 
 if __name__ == "__main__":
