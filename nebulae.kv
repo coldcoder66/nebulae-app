@@ -115,18 +115,7 @@
             Rectangle:
                 pos: self.parent.x if self.parent else 0, self.y
                 size: self.parent.width if self.parent else self.width, self.height
-        MDRaisedButton:
-            text: "Home"
-            on_release: app.change_screen('main')
-            font_name: 'BayerType'
-            font_size: root.height * 0.035
-            size_hint_x: None
-            width: root.width * 0.18
-            size_hint_y: None
-            height: root.height * 0.07
-            padding: [16, 0]
-            md_bg_color: 0.22, 0.38, 0.56, 1  # lighter than navbar
-            text_color: 1, 1, 1, 1
+                
         MDRaisedButton:
             text: "Library"
             on_release: app.change_screen('library')
@@ -137,7 +126,7 @@
             size_hint_y: None
             height: root.height * 0.07
             padding: [16, 0]
-            md_bg_color: 0.22, 0.38, 0.56, 1
+            md_bg_color: 0.22, 0.38, 0.56, 1  # lighter than navbar
             text_color: 1, 1, 1, 1
         Widget:
         MDRaisedButton:
@@ -156,12 +145,12 @@
     Label:
         text: "nebulae"
         font_name: 'BayerType'
-        font_size: root.height * 0.11  # larger
+        font_size: root.height * 0.11
         bold: True
         color: 0.117647, 0.239215, 0.345098, 1
         letter_spacing: 4
         size_hint_y: None
-        height: self.texture_size[1] + root.height * 0.04  # extra top margin
+        height: self.texture_size[1] + root.height * 0.04
         pos_hint: {"top": 1}
 
     MDRaisedButton:
@@ -176,7 +165,20 @@
         md_bg_color: 0.117647, 0.239215, 0.345098, 1
         text_color: 1, 1, 1, 1
         on_release: app.change_screen('assistant')
+        
+    Widget:
+        size_hint_y: None
+        height: root.height * 0.12   # adjust this number to move them lower
 
+    Label:
+        text: "project library"
+        font_name: 'BayerType'
+        font_size: root.height * 0.035
+        color: 0.117647, 0.239215, 0.345098, 1
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.01
+
+    # ⬇️ MOVED HERE — now under "project library"
     MDRaisedButton:
         text: "> videos"
         on_release: app.change_screen('videos')
@@ -201,21 +203,12 @@
         md_bg_color: 0.6, 0.7, 0.9, 1
         text_color: 0, 0, 0, 1
 
-    Label:
-        text: "project library"
-        font_name: 'BayerType'
-        font_size: root.height * 0.035
-        color: 0.117647, 0.239215, 0.345098, 1
-        size_hint_y: None
-        height: self.texture_size[1] + root.height * 0.01
-
     BoxLayout:
         orientation: "vertical"
-        spacing: root.height * 0.005  # reduced spacing
-        padding: [root.width * 0.04, 0, 0, 0]  # remove top padding
+        spacing: root.height * 0.005
+        padding: [root.width * 0.04, 0, 0, 0]
         canvas.before:
             Rectangle:
-                size: (700, 400)  # Replace with your textbg.jpg's native size
+                size: (700, 400)
                 pos: (self.center_x - 350, self.center_y - 200)
                 source: 'textbg.jpg'
-        
