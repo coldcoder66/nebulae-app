@@ -1,44 +1,107 @@
 <MainLayout>:
     orientation: "vertical"
-    padding: root.width * 0.05, root.height * 0.05
+
+    # Responsive padding and spacing — top padding removed so nav sits at screen top
+    padding: [root.width * 0.05, 0, root.width * 0.05, root.height * 0.05]
     spacing: root.height * 0.03
 
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "assets/bg.png"   # your background image
+            source: 'ebook.png'
+
+    # Top navigation bar (flush to top, full width)
+    BoxLayout:
+        pos_hint: {"top": 1}
+        size_hint_y: None
+        height: root.height * 0.085
+        padding: [root.width * 0.02, root.height * 0.01]
+        spacing: root.width * 0.02
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.85
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Button:
+            text: "Home"
+            font_name: 'BayerType'
+            size_hint_x: None
+            width: root.width * 0.12
+            size_hint_y: None
+            height: root.height * 0.07
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            color: 0.117647, 0.239215, 0.345098, 1
+
+        Button:
+            text: "Library"
+            font_name: 'BayerType'
+            size_hint_x: None
+            width: root.width * 0.12
+            size_hint_y: None
+            height: root.height * 0.07
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            color: 0.117647, 0.239215, 0.345098, 1
+
+        Widget:
+            # spacer
+
+        Button:
+            text: "Settings"
+            font_name: 'BayerType'
+            size_hint_x: None
+            width: root.width * 0.12
+            size_hint_y: None
+            height: root.height * 0.07
+            background_normal: ''
+            background_color: 0, 0, 0, 0
+            color: 0.117647, 0.239215, 0.345098, 1
 
     Label:
         text: "nebulae"
-        font_name: "assets/myfont.ttf"
+        font_name: 'BayerType'
         font_size: root.height * 0.06
-        color: 1, 1, 1, 1
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
 
-    Label:
+    Button:
         text: "ai assistant"
-        font_name: "assets/myfont.ttf"
+        font_name: 'BayerType'
         font_size: root.height * 0.04
-        color: 1, 1, 1, 1
+        size_hint_y: None
+        height: root.height * 0.06
+        background_normal: ''
+        background_color: 0.6, 0.7, 0.9, 1
+        color: 0, 0, 0, 1
+
 
     Label:
         text: "project library"
-        font_name: "assets/myfont.ttf"
+        font_name: 'BayerType'
         font_size: root.height * 0.035
-        color: 1, 1, 1, 1
+        color: 0.117647, 0.239215, 0.345098, 1
 
-    Button:
-        text: "> videos"
-        font_name: "assets/myfont.ttf"
-        size_hint_y: None
-        height: root.height * 0.08
-        background_color: 0, 0, 0, 0.4
-        color: 1, 1, 1, 1
+    BoxLayout:
+        orientation: "vertical"
+        spacing: root.height * 0.015
+        padding: [root.width * 0.04, 0]
 
-    Button:
-        text: "> visual graphics"
-        font_name: "assets/myfont.ttf"
-        size_hint_y: None
-        height: root.height * 0.08
-        background_color: 0, 0, 0, 0.4
-        color: 1, 1, 1, 1
+        Button:
+            text: "> videos"
+            font_name: 'BayerType'
+            size_hint_y: None
+            height: root.height * 0.08
+            background_color: 0.6, 0.7, 0.9, 1
+            color: 0, 0, 0, 1
+
+        Button:
+            text: "> visual graphics"
+            font_name: 'BayerType'
+            size_hint_y: None
+            height: root.height * 0.08
+            background_color: 0.6, 0.7, 0.9, 1
+            color: 0, 0, 0, 1
