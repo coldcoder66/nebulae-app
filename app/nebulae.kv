@@ -136,18 +136,18 @@
             on_release: app.change_screen('main')
 
         # --- VideoPlayer OVERLAY (always on top) ---
-        # VideoPlayer:
-        #     id: player
-        #     source: "testvideo.mp4"
-        #     state: "play"
-        #     options: {"eos": "loop"}
+        VideoPlayer:
+            id: player
+            source: "assets/videos/testvideo.mp4"
+            state: "play"
+            options: {"eos": "loop"}
 
-        #     size_hint: None, None
-        #     size: root.width * 0.8, root.height * 0.4
-        #     pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            size_hint: None, None
+            size: root.width * 0.8, root.height * 0.4
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
 
-        #     allow_stretch: True
-        #     keep_ratio: False
+            allow_stretch: True
+            keep_ratio: False
 
 
             
