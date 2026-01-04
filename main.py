@@ -1,10 +1,14 @@
 from kivymd.app import MDApp
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.videoplayer import VideoPlayer
+from kivy.uix.floatlayout import FloatLayout
 from kivy.core.image import Image as CoreImage
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
 import os
+print("Exists:", os.path.exists("testvideo.mp4"))
+
 
 class MainLayout(BoxLayout):
     pass
@@ -17,8 +21,11 @@ class SettingsScreen(Screen):
     pass
 class AssistantScreen(Screen):
     pass
+
+
 class VideosScreen(Screen):
     pass
+
 class VisualGraphicsScreen(Screen):
     pass
 

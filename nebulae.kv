@@ -36,6 +36,12 @@
             pos: self.pos
             size: self.size
             source: 'bg.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: root.height * 0.03
+        spacing: root.height * 0.02
+
     MDRaisedButton:
         text: "Back"
         pos_hint: {"x": 0.02, "y": 0.92}
@@ -44,6 +50,17 @@
         md_bg_color: 0.117647, 0.239215, 0.345098, 1
         text_color: 1, 1, 1, 1
         on_release: app.change_screen('main')
+        
+    Label:
+        text: "Settings"
+        font_name: 'BayerType'
+        font_size: root.height * 0.11
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04
+        pos_hint: {"top": 1}
 
 <AssistantScreen>:
     canvas.before:
@@ -51,6 +68,12 @@
             pos: self.pos
             size: self.size
             source: 'bg.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: root.height * 0.03
+        spacing: root.height * 0.02 
+
     MDRaisedButton:
         text: "Back"
         pos_hint: {"x": 0.02, "y": 0.92}
@@ -60,20 +83,74 @@
         text_color: 1, 1, 1, 1
         on_release: app.change_screen('main')
 
+    Label:
+        text: "AI Assistant"
+        font_name: 'BayerType'
+        font_size: root.height * 0.11
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04
+        pos_hint: {"top": 1}
+
 <VideosScreen>:
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'bg.png'
-    MDRaisedButton:
-        text: "Back"
-        pos_hint: {"x": 0.02, "y": 0.92}
-        size_hint: None, None
-        size: 120, 48
-        md_bg_color: 0.117647, 0.239215, 0.345098, 1
-        text_color: 1, 1, 1, 1
-        on_release: app.change_screen('main')
+    FloatLayout:
+
+        # --- Background image ---
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'bg.png'
+
+        # --- Your BoxLayout content ---
+        BoxLayout:
+            orientation: "vertical"
+            padding: root.height * 0.03
+            spacing: root.height * 0.02
+            size_hint: 1, 1
+
+            # Title
+            Label:
+                text: "Videos"
+                font_name: 'BayerType'
+                font_size: root.height * 0.11
+                bold: True
+                color: 0.117647, 0.239215, 0.345098, 1
+                letter_spacing: 4
+                size_hint_y: None
+                height: self.texture_size[1] + root.height * 0.04
+                pos_hint: {"top": 1}
+
+            Widget:   # Spacer so layout doesn't collapse
+
+        # --- Back Button (floats above layout) ---
+        MDRaisedButton:
+            text: "Back"
+            pos_hint: {"x": 0.02, "y": 0.92}
+            size_hint: None, None
+            size: 120, 48
+            md_bg_color: 0.117647, 0.239215, 0.345098, 1
+            text_color: 1, 1, 1, 1
+            on_release: app.change_screen('main')
+
+        # --- VideoPlayer OVERLAY (always on top) ---
+        VideoPlayer:
+            id: player
+            source: "testvideo.mp4"
+            state: "play"
+            options: {"eos": "loop"}
+
+            size_hint: None, None
+            size: root.width * 0.8, root.height * 0.4
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+
+            allow_stretch: True
+            keep_ratio: False
+
+
+            
 
 <VisualGraphicsScreen>:
     canvas.before:
@@ -81,6 +158,12 @@
             pos: self.pos
             size: self.size
             source: 'bg.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: root.height * 0.03
+        spacing: root.height * 0.02
+        
     MDRaisedButton:
         text: "Back"
         pos_hint: {"x": 0.02, "y": 0.92}
@@ -89,6 +172,18 @@
         md_bg_color: 0.117647, 0.239215, 0.345098, 1
         text_color: 1, 1, 1, 1
         on_release: app.change_screen('main')
+    
+    Label:
+        text: "Visual Graphics"
+        font_name: 'BayerType'
+        font_size: root.height * 0.11
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04
+        pos_hint: {"top": 1}
+
 <MainScreen>:
     MainLayout:
 <MainLayout>:
@@ -116,31 +211,7 @@
                 pos: self.parent.x if self.parent else 0, self.y
                 size: self.parent.width if self.parent else self.width, self.height
                 
-        MDRaisedButton:
-            text: "Library"
-            on_release: app.change_screen('library')
-            font_name: 'BayerType'
-            font_size: root.height * 0.035
-            size_hint_x: None
-            width: root.width * 0.18
-            size_hint_y: None
-            height: root.height * 0.07
-            padding: [16, 0]
-            md_bg_color: 0.22, 0.38, 0.56, 1  # lighter than navbar
-            text_color: 1, 1, 1, 1
-        Widget:
-        MDRaisedButton:
-            text: "Settings"
-            on_release: app.change_screen('settings')
-            font_name: 'BayerType'
-            font_size: root.height * 0.035
-            size_hint_x: None
-            width: root.width * 0.18
-            size_hint_y: None
-            height: root.height * 0.07
-            padding: [16, 0]
-            md_bg_color: 0.22, 0.38, 0.56, 1
-            text_color: 1, 1, 1, 1
+        # Buttons removed as requested
 
     Label:
         text: "nebulae"
