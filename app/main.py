@@ -7,8 +7,6 @@ from kivy.core.image import Image as CoreImage
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
 import os
-print("Exists:", os.path.exists("testvideo.mp4"))
-
 
 class MainLayout(BoxLayout):
     pass
@@ -22,7 +20,6 @@ class SettingsScreen(Screen):
 class AssistantScreen(Screen):
     pass
 
-
 class VideosScreen(Screen):
     pass
 
@@ -30,7 +27,11 @@ class VisualGraphicsScreen(Screen):
     pass
 
 class NebulaeApp(MDApp):
-    def build(self):
+    def build(self) -> ScreenManager:
+        """
+        Build and set the theme for the screen manager. Returns a
+        Widget instance that is the root of the widget tree.
+        """
         self.sm = ScreenManager()
         self.sm.add_widget(MainScreen(name="main"))
         self.sm.add_widget(LibraryScreen(name="library"))
@@ -50,25 +51,18 @@ if __name__ == "__main__":
     def _find_font(substr="bayer"):
         substr = substr.lower()
         # Search the app directory first
-        app_dir = os.path.dirname(__file__)
+        app_dir = os.path.join(os.path.dirname(__file__), 'assets', 'fonts')
         for root, _, files in os.walk(app_dir):
-            for f in files:
-                if f.lower().endswith((".otf", ".ttf")) and substr in f.lower():
-                    return os.path.join(root, f)
-        # Search user's Downloads
-        downloads = os.path.join(os.path.expanduser("~"), "Downloads")
-        for root, _, files in os.walk(downloads):
             for f in files:
                 if f.lower().endswith((".otf", ".ttf")) and substr in f.lower():
                     return os.path.join(root, f)
         return None
 
-    try:
-        found_font = _find_font("bayer")
-        if found_font and os.path.exists(found_font):
-            LabelBase.register(name="BayerType", fn_regular=found_font)
-    except Exception:
-        pass
+    found_font = _find_font("bayer")
+    if found_font and os.path.exists(found_font):
+        LabelBase.register(name="BayerType", fn_regular=found_font)
+    else:
+        print("Warning: fonttype not found")
 
     # Try to fit the app to the user's screen: maximize, else use system size, else fallback to fullscreen
     try:

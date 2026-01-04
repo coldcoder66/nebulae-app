@@ -1,4 +1,8 @@
-# Intercalm-Speech
+# Nebulae
+
+In Visual Studio Code, [create a virtual environment](https://code.visualstudio.com/docs/python/environments#_creating-environments). Wait for the environment to be created.
+
+After creation, select the [Python interpreter created](https://code.visualstudio.com/docs/python/environments#_working-with-python-interpreters).
 
 To launch the kivy app, change to the app directory, install requirements, and then run main.py
 ```bash
