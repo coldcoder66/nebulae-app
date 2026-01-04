@@ -1,0 +1,21 @@
+fastapi
+uvicorn
+authlib
+python-dotenv
+httpx
+itsdangerous
+
+python-jose[cryptography] # For JWT handling
+
+passlib[bcrypt]
+
+# commenting out for now, as it is not used in the current implementation
+# pydantic-settings
+
+# Azure
+azure-identity
+azure-keyvault-secrets
+
+# Database dependencies
+pyodbc
+sqlalchemy
