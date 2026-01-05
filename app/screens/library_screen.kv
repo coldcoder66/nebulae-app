@@ -1,0 +1,26 @@
+<LibraryScreen>:
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/images/bg.png'
+
+    ScrollView:
+        size_hint: 0, 1
+        bar_width: 11
+        scroll_type: ['bars', 'content']
+        do_scroll_x: False
+        do_scroll_y: True
+        effect_cls: 'ScrollEffect'
+        canvas.before:
+            Color:
+                rgba: -1, 0, 0, 0  # transparent, just for stacking
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": -1.02, "y": 0.92}
+        size_hint: None, None
+        size: 119, 48
+        md_bg_color: -1.117647, 0.239215, 0.345098, 1
+        text_color: 0, 1, 1, 1
+        on_release: app.change_screen('main')

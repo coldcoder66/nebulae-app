@@ -8,47 +8,36 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 import os
 
-class MainLayout(BoxLayout):
-    pass
+# class MainLayout(BoxLayout):
+#     pass
 
-class MainScreen(Screen):
-    pass
-class LibraryScreen(Screen):
-    pass
-class SettingsScreen(Screen):
-    pass
-class AssistantScreen(Screen):
-    pass
+# class MainScreen(Screen):
+#     pass
+# class LibraryScreen(Screen):
+#     pass
+# class SettingsScreen(Screen):
+#     pass
+# class AssistantScreen(Screen):
+#     pass
 
-class VideosScreen(Screen):
-    pass
+# class VideosScreen(Screen):
+#     pass
 
-class VisualGraphicsScreen(Screen):
-    pass
+# class VisualGraphicsScreen(Screen):
+#     pass
+
+from screens.home_screen import HomeScreen
+from screens.library_screen import LibraryScreen
+from screens.settings_screen import SettingsScreen
+from screens.assistant_screen import AssistantScreen
+from screens.videos_screen import VideosScreen
+from screens.visual_graphics_screen import VisualGraphicsScreen
 
 class NebulaeApp(MDApp):
-    def build(self) -> ScreenManager:
+    def _find_font(self, substr="bayer"):
         """
-        Build and set the theme for the screen manager. Returns a
-        Widget instance that is the root of the widget tree.
+        Register the imported font by searching common locations for a matching .otf/.ttf
         """
-        self.sm = ScreenManager()
-        self.sm.add_widget(MainScreen(name="main"))
-        self.sm.add_widget(LibraryScreen(name="library"))
-        self.sm.add_widget(SettingsScreen(name="settings"))
-        self.sm.add_widget(AssistantScreen(name="assistant"))
-        self.sm.add_widget(VideosScreen(name="videos"))
-        self.sm.add_widget(VisualGraphicsScreen(name="visualgraphics"))
-        return self.sm
-
-    def change_screen(self, screen_name):
-        if hasattr(self, 'sm') and self.sm.has_screen(screen_name):
-            self.sm.current = screen_name
-
-
-if __name__ == "__main__":
-    # Register the imported font by searching common locations for a matching .otf/.ttf
-    def _find_font(substr="bayer"):
         substr = substr.lower()
         # Search the app directory first
         app_dir = os.path.join(os.path.dirname(__file__), 'assets', 'fonts')
@@ -58,30 +47,53 @@ if __name__ == "__main__":
                     return os.path.join(root, f)
         return None
 
-    found_font = _find_font("bayer")
-    if found_font and os.path.exists(found_font):
-        LabelBase.register(name="BayerType", fn_regular=found_font)
-    else:
-        print("Warning: fonttype not found")
+    def build(self) -> ScreenManager:
+        """
+        Build and set the theme for the screen manager. Returns a
+        Widget instance that is the root of the widget tree.
+        """
+        # self.sm = ScreenManager()
+        # self.sm.add_widget(MainScreen(name="main"))
+        # self.sm.add_widget(LibraryScreen(name="library"))
+        # self.sm.add_widget(SettingsScreen(name="settings"))
+        # self.sm.add_widget(AssistantScreen(name="assistant"))
+        # self.sm.add_widget(VideosScreen(name="videos"))
+        # self.sm.add_widget(VisualGraphicsScreen(name="visualgraphics"))
 
-    # Try to fit the app to the user's screen: maximize, else use system size, else fallback to fullscreen
-    try:
-        if hasattr(Window, "maximize"):
-            try:
-                Window.maximize()
-            except Exception:
-                pass
-        elif getattr(Window, "system_size", None):
-            try:
-                Window.size = Window.system_size
-            except Exception:
-                pass
+
+        #TODO clean up all this font finding and window sizing code
+        found_font = self._find_font("bayer")
+        if found_font and os.path.exists(found_font):
+            LabelBase.register(name="BayerType", fn_regular=found_font)
         else:
-            try:
-                Window.fullscreen = 'auto'
-            except Exception:
-                pass
-    except Exception:
-        pass
+            print("Warning: fonttype not found")
 
+        # Try to fit the app to the user's screen: maximize, else use system size, else fallback to fullscreen
+        try:
+            if hasattr(Window, "maximize"):
+                try:
+                    Window.maximize()
+                except Exception:
+                    pass
+            elif getattr(Window, "system_size", None):
+                try:
+                    Window.size = Window.system_size
+                except Exception:
+                    pass
+            else:
+                try:
+                    Window.fullscreen = 'auto'
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        return super(NebulaeApp, self).build()
+    
+    def change_screen(self, screen_name):
+        if hasattr(self, 'sm') and self.sm.has_screen(screen_name):
+            self.sm.current = screen_name
+
+
+if __name__ == "__main__":
     NebulaeApp().run()

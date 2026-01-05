@@ -1,0 +1,31 @@
+<AssistantScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/images/bg.png'
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: root.height * 0.03
+        spacing: root.height * 0.02 
+
+    MDRaisedButton:
+        text: "Back"
+        pos_hint: {"x": 0.02, "y": 0.92}
+        size_hint: None, None
+        size: 120, 48
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_release: app.change_screen('main')
+
+    Label:
+        text: "AI Assistant"
+        font_name: 'BayerType'
+        font_size: root.height * 0.11
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04
+        pos_hint: {"top": 1}
