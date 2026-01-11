@@ -8,25 +8,8 @@ from kivy.core.text import LabelBase
 from kivy.core.window import Window
 import os
 
-# class MainLayout(BoxLayout):
-#     pass
-
-# class MainScreen(Screen):
-#     pass
-# class LibraryScreen(Screen):
-#     pass
-# class SettingsScreen(Screen):
-#     pass
-# class AssistantScreen(Screen):
-#     pass
-
-# class VideosScreen(Screen):
-#     pass
-
-# class VisualGraphicsScreen(Screen):
-#     pass
-
-from screens.home_screen import HomeScreen
+#Import all of the screens so that they are recognized when loading the Kivy files
+from screens.home_screen import HomeScreen, MainLayout
 from screens.library_screen import LibraryScreen
 from screens.settings_screen import SettingsScreen
 from screens.assistant_screen import AssistantScreen
@@ -38,6 +21,8 @@ class NebulaeApp(MDApp):
         """
         Register the imported font by searching common locations for a matching .otf/.ttf
         """
+
+        #TODO hardcode the path to the font file and delete this search function
         substr = substr.lower()
         # Search the app directory first
         app_dir = os.path.join(os.path.dirname(__file__), 'assets', 'fonts')
@@ -52,14 +37,6 @@ class NebulaeApp(MDApp):
         Build and set the theme for the screen manager. Returns a
         Widget instance that is the root of the widget tree.
         """
-        # self.sm = ScreenManager()
-        # self.sm.add_widget(MainScreen(name="main"))
-        # self.sm.add_widget(LibraryScreen(name="library"))
-        # self.sm.add_widget(SettingsScreen(name="settings"))
-        # self.sm.add_widget(AssistantScreen(name="assistant"))
-        # self.sm.add_widget(VideosScreen(name="videos"))
-        # self.sm.add_widget(VisualGraphicsScreen(name="visualgraphics"))
-
 
         #TODO clean up all this font finding and window sizing code
         found_font = self._find_font("bayer")
@@ -90,10 +67,5 @@ class NebulaeApp(MDApp):
 
         return super(NebulaeApp, self).build()
     
-    def change_screen(self, screen_name):
-        if hasattr(self, 'sm') and self.sm.has_screen(screen_name):
-            self.sm.current = screen_name
-
-
 if __name__ == "__main__":
     NebulaeApp().run()
