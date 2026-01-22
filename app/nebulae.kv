@@ -1,0 +1,25 @@
+#:include screens/home_screen.kv
+#:include screens/library_screen.kv
+#:include screens/settings_screen.kv
+#:include screens/assistant_screen.kv
+#:include screens/videos_screen.kv
+#:include screens/visual_graphics_screen.kv
+
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+ScreenManager:
+    title: 'Nebulae'
+    transition: NoTransition()
+    HomeScreen:
+        name: 'home'
+    VideosScreen:
+        name: 'videos'
+    VisualGraphicsScreen:
+        name: 'visualgraphics'
+    AssistantScreen:
+        name: 'assistant'
+    LibraryScreen:
+        name: 'library'
+    SettingsScreen:
+        name: 'settings'
+    

@@ -1,0 +1,98 @@
+<HomeScreen>:
+    MainLayout:
+
+<MainLayout>:
+    orientation: "vertical"
+    padding: [root.width * 0.05, 0, root.width * 0.05, root.height * 0.05]
+    spacing: root.height * 0.03
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/images/bg.png'
+
+    # Top navigation bar
+    BoxLayout:
+        pos_hint: {"top": 1}
+        size_hint_x: 1
+        size_hint_y: None
+        height: root.height * 0.085
+        padding: [0, root.height * 0.01, 0, root.height * 0.01]
+        spacing: root.width * 0.025
+        canvas.before:
+            Color:
+                rgba: 0.117647, 0.239215, 0.345098, 1
+            Rectangle:
+                pos: self.parent.x if self.parent else 0, self.y
+                size: self.parent.width if self.parent else self.width, self.height
+                
+    Label:
+        text: "nebulae"
+        font_name: 'BayerType'
+        font_size: root.height * 0.11
+        bold: True
+        color: 0.117647, 0.239215, 0.345098, 1
+        letter_spacing: 4
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.04
+        pos_hint: {"top": 1}
+
+    MDRaisedButton:
+        text: "ai assistant"
+        font_name: 'BayerType'
+        font_size: root.height * 0.04
+        size_hint_y: None
+        height: root.height * 0.06
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.117647, 0.239215, 0.345098, 1
+        text_color: 1, 1, 1, 1
+        on_press: app.root.current = 'assistant'
+        
+    Widget:
+        size_hint_y: None
+        height: root.height * 0.12   # adjust this number to move them lower
+
+    Label:
+        text: "project library"
+        font_name: 'BayerType'
+        font_size: root.height * 0.035
+        color: 0.117647, 0.239215, 0.345098, 1
+        size_hint_y: None
+        height: self.texture_size[1] + root.height * 0.01
+
+    # ⬇️ MOVED HERE — now under "project library"
+    MDRaisedButton:
+        text: "> videos"
+        on_release: app.root.current = 'videos'
+        font_name: 'BayerType'
+        size_hint_y: None
+        height: root.height * 0.08
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.6, 0.7, 0.9, 1
+        text_color: 0, 0, 0, 1
+
+    MDRaisedButton:
+        text: "> visual graphics"
+        on_release: app.root.current = 'visualgraphics'
+        font_name: 'BayerType'
+        size_hint_y: None
+        height: root.height * 0.08
+        size_hint_x: None
+        width: root.width * 0.18
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.6, 0.7, 0.9, 1
+        text_color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: root.height * 0.005
+        padding: [root.width * 0.04, 0, 0, 0]
+        canvas.before:
+            Rectangle:
+                size: (700, 400)
+                pos: (self.center_x - 350, self.center_y - 200)
+                source: 'assets/images/textbg.jpg'

@@ -1,0 +1,8 @@
+kivy
+kivymd
+ffpyplayer
+pillow
+
+# developer dependencies
+pyinstaller
+pytest
