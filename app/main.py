@@ -45,6 +45,9 @@ class NebulaeApp(MDApp):
         else:
             print("Warning: fonttype not found")
 
+        # Register the "droplineregular" font
+        LabelBase.register(name="DroplineRegular", fn_regular=self._find_font("droplineregular"))
+
         # Try to fit the app to the user's screen: maximize, else use system size, else fallback to fullscreen
         try:
             if hasattr(Window, "maximize"):

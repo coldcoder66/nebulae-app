@@ -3,7 +3,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'assets/images/bg.png'
+            source: 'assets/images/videosbg.png'
 
     MDRaisedButton:
         text: "Back"
@@ -13,9 +13,10 @@
         md_bg_color: 0.117647, 0.239215, 0.345098, 1
         text_color: 1, 1, 1, 1
         on_release: app.root.current = 'home'
-    
+
     Label:
         text: "Visual Graphics"
+        font_name: "DroplineRegular"
         font_size: root.height * 0.11
         bold: True
         color: 0.117647, 0.239215, 0.345098, 1
@@ -23,3 +24,63 @@
         size_hint_y: None
         height: self.texture_size[1] + root.height * 0.04
         pos_hint: {"top": 1}
+
+    BoxLayout:
+        id: image_box
+        orientation: 'vertical'
+        size_hint: 0.7, 0.6
+        pos_hint: {"center_x": 0.4, "center_y": 0.5}
+        canvas.before:
+            Color:
+                rgba: 0.117647, 0.239215, 0.345098, 1 # Light gray background for the box
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [20, 20, 20, 20]  # Rounded corners
+
+        RelativeLayout:
+            Image:
+                id: display_image
+                source: 'assets/images/sample_image.png'  # Default image
+                allow_stretch: True
+                keep_ratio: True
+
+            Button:
+                text: 'X'
+                size_hint: None, None
+                size: 40, 40
+                pos_hint: {"right": 1, "top": 1}
+                background_color: 1, 0, 0, 1  # Red background for the close button
+                color: 1, 1, 1, 1  # White text color
+                on_release: display_image.source = ''  # Clear the image
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, 0.6
+        width: root.width * 0.1
+        pos_hint: {"right": 1, "center_y": 0.5}
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.117647, 0.239215, 0.345098, 1  # Dark background for the navbar
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Button:
+            text: 'Visual Graphic 1'
+            size_hint: 1, None
+            height: 80
+            on_release: display_image.source = 'assets/images/visualgraphicexample.png'  # Update image source
+
+        Button:
+            text: 'Visual Graphic 2'
+            size_hint: 1, None
+            height: 80
+            on_release: display_image.source = 'assets/images/visualgraphic2.png'  # Update image source
+
+        Button:
+            text: 'Visual Graphic 3'
+            size_hint: 1, None
+            height: 80
+            on_release: display_image.source = 'assets/images/visualgraphicexample.png'  # Update image source

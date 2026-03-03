@@ -6,7 +6,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: 'assets/images/bg.png'
+                source: 'assets/images/videosbg.png'
 
         # --- Your BoxLayout content ---
         BoxLayout:
@@ -18,6 +18,7 @@
             # Title
             Label:
                 text: "Videos"
+                font_name: "DroplineRegular"
                 font_size: root.height * 0.11
                 bold: True
                 color: 0.117647, 0.239215, 0.345098, 1
@@ -51,3 +52,35 @@
 
             allow_stretch: True
             keep_ratio: False
+
+        # --- Toolbar with video lesson buttons ---
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: None, 0.6
+            width: root.width * 0.1
+            pos_hint: {"right": 1, "center_y": 0.5}
+            spacing: 10
+            canvas.before:
+                Color:
+                    rgba: 0.117647, 0.239215, 0.345098, 1  # Dark background for the toolbar
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: 'Video Lesson 1'
+                size_hint: 1, None
+                height: 80
+                on_release: player.source = 'assets/videos/testvideo.mp4'; player.state = 'play'  # Set video source and play
+
+            Button:
+                text: 'Video Lesson 2'
+                size_hint: 1, None
+                height: 80
+                on_release: player.source = 'assets/videos/testvideo.mp4'; player.state = 'play'  # Set video source and play
+
+            Button:
+                text: 'Video Lesson 3'
+                size_hint: 1, None
+                height: 80
+                on_release: player.source = 'assets/videos/testvideo.mp4'; player.state = 'play'  # Set video source and play
