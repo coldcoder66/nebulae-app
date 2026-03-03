@@ -17,9 +17,47 @@
     Label:
         text: "AI Assistant"
         font_size: root.height * 0.11
+        font_name: "DroplineRegular"
         bold: True
         color: 0.117647, 0.239215, 0.345098, 1
         letter_spacing: 4
         size_hint_y: None
         height: self.texture_size[1] + root.height * 0.04
         pos_hint: {"top": 1}
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        ScrollView:
+            size_hint: (1, 0.7)
+            do_scroll_x: False
+            do_scroll_y: True
+
+            Label:
+                id: conversation_label
+                text: root.conversation_history
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+                valign: "top"
+                halign: "left"
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+
+            TextInput:
+                id: user_input
+                hint_text: "Type your message here..."
+                multiline: False
+
+            MDRaisedButton:
+                text: "Send"
+                size_hint_x: None
+                width: 100
+                on_press:
+                    root.send_message(user_input.text)
+                    user_input.text = ""
