@@ -30,6 +30,15 @@
         padding: 10
         spacing: 10
 
+        Label:
+            text: root.status_text
+            size_hint_y: None
+            height: self.texture_size[1] + 12
+            color: 0.117647, 0.239215, 0.345098, 1
+            text_size: self.width, None
+            halign: "left"
+            valign: "middle"
+
         ScrollView:
             size_hint: (1, 0.7)
             do_scroll_x: False
@@ -53,11 +62,13 @@
                 id: user_input
                 hint_text: "Type your message here..."
                 multiline: False
+                disabled: root.is_request_in_progress
 
             MDRaisedButton:
                 text: "Send"
                 size_hint_x: None
                 width: 100
+                disabled: root.is_request_in_progress
                 on_press:
                     root.send_message(user_input.text)
                     user_input.text = ""

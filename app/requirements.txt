@@ -3,6 +3,10 @@ kivymd
 ffpyplayer
 pillow
 
+azure-ai-projects
+azure-identity
+python-dotenv
+
 # developer dependencies
 pyinstaller
 pytest
