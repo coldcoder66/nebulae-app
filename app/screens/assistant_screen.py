@@ -25,7 +25,7 @@ class AssistantScreen(Screen):
         self.conversation.append({"role": "user", "content": message})
         self.update_conversation_history()
         self.is_request_in_progress = True
-        self.status_text = "Nebulae is thinking..."
+        self.status_text = "Ranae is thinking..."
 
         Clock.schedule_once(lambda _: self._request_agent_response(), 0)
 

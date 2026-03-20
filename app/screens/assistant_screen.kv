@@ -25,6 +25,12 @@
         height: self.texture_size[1] + root.height * 0.04
         pos_hint: {"top": 1}
 
+    Image:
+        source: 'assets/images/ranaeicon.png'
+        size_hint: None, None
+        size: root.width * 0.1, root.width * 0.1  # Make the image very small
+        pos_hint: {"center_x": 0.5, "top": 0.88}  # Position directly below the AI Assistant label
+
     BoxLayout:
         orientation: "vertical"
         padding: 10
@@ -36,23 +42,43 @@
             height: self.texture_size[1] + 12
             color: 0.117647, 0.239215, 0.345098, 1
             text_size: self.width, None
-            halign: "left"
+            halign: "center"
             valign: "middle"
 
-        ScrollView:
-            size_hint: (1, 0.7)
-            do_scroll_x: False
-            do_scroll_y: True
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: (0.75, None)  # Reduce width to 75% of the screen
+            height: root.height * 0.7  # Increase height of the box
+            padding: 10
+            pos_hint: {"top": 0.9, "center_x": 0.5}  # Center horizontally
+            canvas.before:
+                Color:
+                    rgba: 0.6, 0.7, 0.9, 0.8  # Slightly less opaque blue background (80% transparency)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20]  # Rounded edges with a radius of 20
+                Color:
+                    rgba: 0.117647, 0.239215, 0.345098, 1  # Border color
+                Line:
+                    width: 3  # Slightly thicker border
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 20)  # Rounded border
 
-            Label:
-                id: conversation_label
-                text: root.conversation_history
-                text_size: self.width, None
-                size_hint_y: None
-                height: self.texture_size[1]
-                valign: "top"
-                halign: "left"
-                color: 0, 0, 0, 1
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+
+                Label:
+                    id: conversation_label
+                    text: root.conversation_history
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    valign: "top"
+                    halign: "center"  # Center horizontally
+                    color: 0.117647, 0.239215, 0.345098, 1
+                    font_name: "DroplineRegular"
+                    font_size: "25sp"  # Slightly larger text
 
         BoxLayout:
             size_hint_y: None
@@ -63,12 +89,14 @@
                 hint_text: "Type your message here..."
                 multiline: False
                 disabled: root.is_request_in_progress
+                font_name: "DroplineRegular"  # Set font to DroplineRegular
 
             MDRaisedButton:
                 text: "Send"
                 size_hint_x: None
                 width: 100
                 disabled: root.is_request_in_progress
+                md_bg_color: 0.117647, 0.239215, 0.345098, 1  # Updated color
                 on_press:
                     root.send_message(user_input.text)
                     user_input.text = ""
