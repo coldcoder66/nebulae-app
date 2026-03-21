@@ -7,16 +7,6 @@ from azure.ai.projects import AIProjectClient
 from azure.core.exceptions import ClientAuthenticationError
 from azure.identity import DefaultAzureCredential
 
-try:
-    from dotenv import load_dotenv
-
-    load_dotenv()
-except Exception:
-    # Optional: .env support for local dev. If python-dotenv isn't installed,
-    # we still want the script to run.
-    pass
-
-
 def _configure_logging() -> None:
     # Keep default behavior quiet unless the user opts in.
     level_name = os.getenv("NEBULAE_LOG_LEVEL", "WARNING").upper()

@@ -16,6 +16,10 @@ from screens.assistant_screen import AssistantScreen
 from screens.videos_screen import VideosScreen
 from screens.visual_graphics_screen import VisualGraphicsScreen
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class NebulaeApp(MDApp):
     def _find_font(self, substr="bayer"):
         """
