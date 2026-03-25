@@ -1,11 +1,35 @@
 from kivy.uix.screenmanager import Screen
 from kivy.clock import Clock
 from kivy.properties import BooleanProperty, StringProperty
+import re
 
 # import sys
 # sys.path.append("../utils")
 
 from utils.agent import AzureAuthenticationError, NebulaeAgentService
+
+def markdown_to_kivy_markup(text):
+    """Convert markdown formatting to Kivy markup."""
+    # Escape existing square brackets to prevent conflicts
+    text = text.replace('[', '&bl;').replace(']', '&br;')
+    
+    # Bold: **text** or __text__
+    text = re.sub(r'\*\*(.+?)\*\*', r'[b]\1[/b]', text)
+    text = re.sub(r'__(.+?)__', r'[b]\1[/b]', text)
+    
+    # Italic: *text* or _text_ (but not already processed bold)
+    text = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'[i]\1[/i]', text)
+    text = re.sub(r'(?<!_)_(?!_)(.+?)(?<!_)_(?!_)', r'[i]\1[/i]', text)
+    
+    # Inline code: `text`
+    text = re.sub(r'`(.+?)`', r'[color=d63031][font=RobotoMono-Regular]\1[/font][/color]', text)
+    
+    # Headers: # text -> larger, bold
+    text = re.sub(r'^### (.+)$', r'[size=28][b]\1[/b][/size]', text, flags=re.MULTILINE)
+    text = re.sub(r'^## (.+)$', r'[size=32][b]\1[/b][/size]', text, flags=re.MULTILINE)
+    text = re.sub(r'^# (.+)$', r'[size=36][b]\1[/b][/size]', text, flags=re.MULTILINE)
+    
+    return text
 
 class AssistantScreen(Screen):
     conversation_history = StringProperty("")
@@ -72,7 +96,12 @@ class AssistantScreen(Screen):
         self.update_conversation_history()
 
     def update_conversation_history(self):
-        self.conversation_history = "\n".join([
-            f"User: {msg['content']}" if msg['role'] == "user" else f"Assistant: {msg['content']}"
-            for msg in self.conversation
-        ])
+        formatted_messages = []
+        for msg in self.conversation:
+            content = markdown_to_kivy_markup(msg['content'])
+            if msg['role'] == "user":
+                formatted_messages.append(f"[b]User:[/b] {content}")
+            else:
+                formatted_messages.append(f"[b]Assistant:[/b] {content}")
+        
+        self.conversation_history = "\n\n".join(formatted_messages)
