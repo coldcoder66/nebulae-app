@@ -26,7 +26,7 @@ _configure_logging()
 LOGGER = logging.getLogger(__name__)
 DEFAULT_PROJECT_ENDPOINT = "https://fndry-nebulae-east.services.ai.azure.com/api/projects/project-nebulae"
 DEFAULT_AGENT_NAME = "nebulae-agent"
-DEFAULT_AGENT_VERSION = "1"
+DEFAULT_AGENT_VERSION = "9"
 
 
 class AzureAuthenticationError(RuntimeError):
