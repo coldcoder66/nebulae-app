@@ -3,9 +3,6 @@ from kivy.clock import Clock
 from kivy.properties import BooleanProperty, StringProperty
 import re
 
-# import sys
-# sys.path.append("../utils")
-
 from utils.agent import AzureAuthenticationError, NebulaeAgentService
 
 def markdown_to_kivy_markup(text):

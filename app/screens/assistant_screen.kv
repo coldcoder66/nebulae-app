@@ -84,6 +84,7 @@
         BoxLayout:
             size_hint_y: None
             height: 50
+            spacing: 5
 
             TextInput:
                 id: user_input
@@ -91,13 +92,20 @@
                 multiline: False
                 disabled: root.is_request_in_progress
                 font_name: "DroplineRegular"  # Set font to DroplineRegular
+                on_text_validate:
+                    root.send_message(user_input.text)
+                    user_input.text = ""
 
-            MDRaisedButton:
-                text: "Send"
-                size_hint_x: None
-                width: 100
-                disabled: root.is_request_in_progress
-                md_bg_color: 0.117647, 0.239215, 0.345098, 1  # Updated color
+            MDIconButton:
+                id: user_input_submit
+                icon: "arrow-up"
+                size_hint: None, None
+                size: 50, 50
+                opacity: 1 if user_input.text else 0
+                disabled: not user_input.text or root.is_request_in_progress
+                md_bg_color: 0.117647, 0.239215, 0.345098, 1
+                theme_icon_color: "Custom"
+                icon_color: 1, 1, 1, 1
                 on_press:
                     root.send_message(user_input.text)
                     user_input.text = ""
