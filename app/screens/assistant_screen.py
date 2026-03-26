@@ -120,11 +120,13 @@ class AssistantScreen(Screen):
             bubble_box.pos_hint = {"right": 1}
             bg_color = (0.117647, 0.239215, 0.345098, 1)  # Dark blue
             text_color = (1, 1, 1, 1)  # White text
+            text_align = "right"
         else:
             outer_box.pos_hint = {"left": 0}
             bubble_box.pos_hint = {"left": 0}
             bg_color = (0.9, 0.9, 0.92, 1)  # Light gray
             text_color = (0.117647, 0.239215, 0.345098, 1)  # Dark blue text
+            text_align = "left"
         
         # Create label with markup
         formatted_content = markdown_to_kivy_markup(content)
@@ -137,7 +139,7 @@ class AssistantScreen(Screen):
             font_name="DroplineRegular",
             font_size="20sp",
             valign="top",
-            halign="left"
+            halign=text_align
         )
         
         # Bind to update text_size when container width changes
