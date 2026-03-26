@@ -65,21 +65,17 @@
                     rounded_rectangle: (self.x, self.y, self.width, self.height, 20)  # Rounded border
 
             ScrollView:
+                id: messages_scrollview
                 do_scroll_x: False
                 do_scroll_y: True
 
-                Label:
-                    id: conversation_label
-                    markup: True
-                    text: root.conversation_history
-                    text_size: self.width, None
+                GridLayout:
+                    id: messages_container
+                    cols: 1
                     size_hint_y: None
-                    height: self.texture_size[1]
-                    valign: "top"
-                    halign: "center"  # Center horizontally
-                    color: 0.117647, 0.239215, 0.345098, 1
-                    font_name: "DroplineRegular"
-                    font_size: "25sp"  # Slightly larger text
+                    height: self.minimum_height
+                    padding: 10
+                    spacing: 10
 
         BoxLayout:
             size_hint_y: None
