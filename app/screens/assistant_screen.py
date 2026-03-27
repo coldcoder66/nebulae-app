@@ -186,3 +186,10 @@ class AssistantScreen(Screen):
         """Scroll the messages view to the bottom."""
         scrollview = self.ids.messages_scrollview
         scrollview.scroll_y = 0
+
+    def start_new_chat(self):
+        """Clear the current conversation and reset the chat interface."""
+        self.conversation.clear()
+        self.ids.messages_container.clear_widgets()
+        self.status_text = "Chat with Ranae."
+        self.is_request_in_progress = False

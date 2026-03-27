@@ -82,6 +82,15 @@
             height: 50
             spacing: 5
 
+            MDRaisedButton:
+                text: "New Chat"
+                size_hint: None, None
+                size: 120, 48
+                pos_hint: {"right": 1}
+                md_bg_color: 0.117647, 0.239215, 0.345098, 1
+                text_color: 1, 1, 1, 1
+                on_press: root.start_new_chat()
+
             TextInput:
                 id: user_input
                 hint_text: "Type your message here..."
